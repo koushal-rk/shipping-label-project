@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCall } from "../api/getCall";
 import "../cssFiles/OrderDetail.css";
@@ -6,42 +6,41 @@ import * as moment from "moment";
 import iphonexr from "../images/iphonexr.jpg";
 import { RiHome5Line } from "react-icons/ri";
 
-import { AiOutlineInbox, AiOutlineHome } from "react-icons/ai";
+// import { AiOutlineInbox, AiOutlineHome } from "react-icons/ai";
 
 import { ImBoxRemove } from "react-icons/im";
 
 import { FaShippingFast } from "react-icons/fa";
+
 function OrderDetail() {
   const { id } = useParams();
   const [orderDetail, setorderDetail] = useState([]);
+  // eslint-disable-next-line
   const [hasshippingdatechanged, sethasshippingdatechanged] = useState(false);
 
   useEffect(() => {
-    getorderdetail();
-  }, []);
-  const getorderdetail = () => {
-    console.log(id);
-    const response = getCall(`/order/${id}`);
-    setorderDetail(response);
-    console.log(response);
+    const getorderdetail = () => {
+      const response = getCall(`/order/${id}`);
+      setorderDetail(response);
 
-    response.map((item) => {
-      if (Object.keys(item.items[0]).includes("newEstimatedShipDateRange")) {
-        sethasshippingdatechanged(
-          (sethasshippingdatechanged) => !sethasshippingdatechanged
-        );
-        console.log(hasshippingdatechanged);
-      }
-    });
-  };
+      response.forEach((item) => {
+        if (Object.keys(item.items[0]).includes("newEstimatedShipDateRange")) {
+          sethasshippingdatechanged(
+            (sethasshippingdatechanged) => !sethasshippingdatechanged
+          );
+        }
+      }, []);
+    };
+    getorderdetail();
+  }, [id]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-      {true & (orderDetail.length != 0) ? (
+      {true & (orderDetail.length !== 0) ? (
         <>
           <div className="mainBoxOrder">
             <div style={{ textAlign: "center", fontFamily: "Roboto" }}>
-              Heads up:Shipping Date has changed
+              Heads up:The shipping date changed.
             </div>
             {orderDetail[0].items[0].userAcceptedDelay ? (
               <>
@@ -65,7 +64,7 @@ function OrderDetail() {
                         borderColor: "black",
                         width: "100px",
                         backgroundColor:
-                          orderDetail[0].status == "ordered"
+                          orderDetail[0].status === "ordered"
                             ? "#487eb0"
                             : "grey",
                         alignSelf: "center",
@@ -91,7 +90,7 @@ function OrderDetail() {
                         borderColor: "black",
                         width: "100px",
                         backgroundColor:
-                          orderDetail[0].status == "shipped"
+                          orderDetail[0].status === "shipped"
                             ? "#487eb0"
                             : "grey",
                         alignSelf: "center",
@@ -117,7 +116,7 @@ function OrderDetail() {
                         borderColor: "black",
                         width: "100px",
                         backgroundColor:
-                          orderDetail[0].status == "delivered"
+                          orderDetail[0].status === "delivered"
                             ? "#487eb0"
                             : "grey",
                         alignSelf: "center",

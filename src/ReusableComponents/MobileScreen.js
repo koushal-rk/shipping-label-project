@@ -10,15 +10,14 @@ function MobileScreen({ order }) {
   useEffect(() => {
     if (hamref.current) {
       hamref.current.addEventListener("click", () => {
-        console.log(hamContent.current.style.display);
-        if (hamContent.current.style.display == "none") {
+        if (hamContent.current.style.display === "none") {
           hamContent.current.style.display = "flex";
         } else {
           hamContent.current.style.display = "none";
         }
       });
     }
-  }, [hamref.current]);
+  }, []);
   return (
     <div className="mobileNav">
       <div ref={hamref} style={{ position: "absolute", left: "30px" }}>

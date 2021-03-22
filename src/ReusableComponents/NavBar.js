@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, forwardRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../cssFiles/NavBar.css";
 
 import { MdArrowDropDown } from "react-icons/md";
@@ -20,16 +20,12 @@ function Navbar() {
 
   const getOrderdetail = () => {
     let res = getCall("/customer/1234/order");
-    console.log(res);
     setorderDetails((orderDetails) => res);
   };
-  console.log(summaryref.current);
-  console.log(orderref.current);
 
   //   let orderStatusdropdown = document.getElementById("orderStatusdropdown");
   //   let OrderPopupdropdown = document.getElementById("OrderPopupdropdown");
   useEffect(() => {
-    console.log(orderref);
     orderref.current.addEventListener("mouseover", () => {
       summaryref.current.style.display = "flex";
     });
@@ -43,7 +39,7 @@ function Navbar() {
     summaryref.current.addEventListener("mouseout", () => {
       summaryref.current.style.display = "none";
     });
-  }, [orderref.current]);
+  }, []);
 
   return (
     <>
@@ -81,7 +77,7 @@ function Navbar() {
             Order Status <MdArrowDropDown />
             <div className="OrderPopup" ref={summaryref}>
               {orderDetails.map((item) => (
-                <OrderPopup order={item} />
+                <OrderPopup order={item} key="{item}" />
               ))}
             </div>
           </div>
