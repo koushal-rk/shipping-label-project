@@ -1,7 +1,7 @@
 import React from "react";
 import iphonexr from "../images/iphonexr.jpg";
 
-import { AiOutlineInbox, AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import * as moment from "moment";
 import { ImBoxRemove } from "react-icons/im";
 
@@ -22,6 +22,7 @@ function OrderPopup({ order }) {
       }}
     >
       <img
+        alt=""
         src={iphonexr}
         style={{
           objectFit: "contain",
@@ -55,7 +56,7 @@ function OrderPopup({ order }) {
               borderWidth: "1px",
               borderColor: "black",
               width: "70px",
-              backgroundColor: order.status == "ordered" ? "#d63031" : "grey",
+              backgroundColor: order.status === "ordered" ? "#d63031" : "grey",
               alignSelf: "center",
               borderRadius: "10px",
               marginTop: 5,
@@ -78,7 +79,7 @@ function OrderPopup({ order }) {
               borderWidth: "1px",
               borderColor: "black",
               width: "70px",
-              backgroundColor: order.status == "shipped" ? "#d63031" : "grey",
+              backgroundColor: order.status === "shipped" ? "#d63031" : "grey",
               alignSelf: "center",
               borderRadius: "10px",
               marginTop: 5,
@@ -101,7 +102,8 @@ function OrderPopup({ order }) {
               borderWidth: "1px",
               borderColor: "black",
               width: "70px",
-              backgroundColor: order.status == "delivered" ? "#d63031" : "grey",
+              backgroundColor:
+                order.status === "delivered" ? "#d63031" : "grey",
               alignSelf: "center",
               borderRadius: "10px",
               marginTop: 5,
