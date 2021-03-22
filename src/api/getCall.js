@@ -1,5 +1,5 @@
 export const getCall = (path) => {
-  if (path == "/customer/1234/order") {
+  if (path === "/customer/1234/order") {
     return [
       {
         id: 10,
@@ -54,7 +54,7 @@ export const getCall = (path) => {
       },
     ];
   }
-  if (path == "/order/10") {
+  if (path === "/order/10") {
     return [
       {
         id: 10,
